@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('includes/head') %>
+  </head>
+  <body>
+    <%- include('includes/header') %>
+    <main>
+      <h1>Discussion</h1>
+      <form action="/discussion" method="GET">
+        <div class="form-control">
+          <label for="author" id="author" name="author">Filter By Author</label>
+          <input type="search" id="author" name="author" />
+          <button class="btn">Find Comments</button>
+        </div>
+      </form>
+
+      <ol>
+        <% for (const comment of comments) {%>
+        <li><%= comment.text %>(<%= comment.author %>)</li>
+        <% } %>
+      </ol>
+
+      <section>
+        <form action="/discussion/comment" method="POST">
+          <div class="form-control">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" />
+          </div>
+          <div class="form-control">
+            <label for="comment">Mycomment</label>
+            <textarea name="comment" id="comment" rows="5"></textarea>
+          </div>
+          <button class="btn">send</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
