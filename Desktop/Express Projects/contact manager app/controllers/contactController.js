@@ -11,7 +11,8 @@ const getContacts = (req, res) => {
 //@Access Public
 
 const createContact = (req, res) => {
-  res.status(201).json({ message: "Create contact" });
+  console.log("The Request Body is:", req.body);
+  res.status(201).json({ message: "Created contact" });
 };
 
 //@description Get Contact;
