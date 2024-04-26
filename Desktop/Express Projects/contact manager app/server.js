@@ -14,5 +14,5 @@ app.use("/api/contacts", require("./routes/contactRoutes"));
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log("Were Up Baby!!!!!!!");
+  console.log("Were Up Baby!!!!!!");
 });

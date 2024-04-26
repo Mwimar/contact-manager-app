@@ -7,6 +7,9 @@ const Contact = require("../models/contactModel");
 
 const getContacts = asyncHandler(async (req, res) => {
   const contacts = await Contact.find();
+  // let lists = Object.entries(contacts);
+  // console.log(typeof lists);
+  // console.log(lists);
   res.status(200).json(contacts);
 });
 
@@ -46,7 +49,18 @@ const getContact = asyncHandler(async (req, res) => {
 //@Access Public
 
 const updateContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update contact for ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found!");
+  }
+
+  const updatedContact = await Contact.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+  res.status(200).json(updatedContact);
 });
 
 //@description Delete Contact;
@@ -54,8 +68,37 @@ const updateContact = asyncHandler(async (req, res) => {
 //@Access Public
 
 const deleteContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete contact for ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found!");
+  }
+  console.log(contact);
+  await Contact.remove(contact);
+
+  res.status(200).json(contact);
 });
+
+// const deleteContact = asyncHandler(async (req, res) => {
+//   const contact = await Contact.findById(req.params.id);
+//   if (!contact) {
+//     res.status(404);
+//     throw new Error("Contact not found!");
+//   }
+
+//   Contact.deleteOne(
+//     {
+//       _id: res.params.id,
+//     },
+//     (err) => {
+//       if (err) {
+//         console.log(err);
+//         return;
+//       }
+//     }
+//   );
+//   res.status(200).json(contact);
+// });
 
 module.exports = {
   getContacts,
