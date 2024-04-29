@@ -3,7 +3,7 @@ const Contact = require("../models/contactModel");
 
 //@description Get All Contacts;
 //@route GET api/contacts
-//@Access Public
+//@Access Private
 
 const getContacts = asyncHandler(async (req, res) => {
   const contacts = await Contact.find();
@@ -15,7 +15,7 @@ const getContacts = asyncHandler(async (req, res) => {
 
 //@description Create New Contact;
 //@route POST api/contacts
-//@Access Public
+//@Access Private
 
 const createContact = asyncHandler(async (req, res) => {
   const { name, email, phone } = req.body;
@@ -33,7 +33,7 @@ const createContact = asyncHandler(async (req, res) => {
 
 //@description Get Contact;
 //@route GET api/contacts/:id
-//@Access Public
+//@Access Private
 
 const getContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
@@ -46,7 +46,7 @@ const getContact = asyncHandler(async (req, res) => {
 
 //@description Update Contact;
 //@route PUT api/contacts/:id
-//@Access Public
+//@Access Private
 
 const updateContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
@@ -65,7 +65,7 @@ const updateContact = asyncHandler(async (req, res) => {
 
 //@description Delete Contact;
 //@route DELETE api/contacts/:id
-//@Access Public
+//@Access Private
 
 const deleteContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
@@ -78,27 +78,6 @@ const deleteContact = asyncHandler(async (req, res) => {
 
   res.status(200).json(contact);
 });
-
-// const deleteContact = asyncHandler(async (req, res) => {
-//   const contact = await Contact.findById(req.params.id);
-//   if (!contact) {
-//     res.status(404);
-//     throw new Error("Contact not found!");
-//   }
-
-//   Contact.deleteOne(
-//     {
-//       _id: res.params.id,
-//     },
-//     (err) => {
-//       if (err) {
-//         console.log(err);
-//         return;
-//       }
-//     }
-//   );
-//   res.status(200).json(contact);
-// });
 
 module.exports = {
   getContacts,
