@@ -14,6 +14,9 @@ const validateToken = asyncHandler(async (req, res, next) => {
       req.user = decoded.user;
       next();
     });
+    if (!token) {
+      throw new Error("User not authorized or token is missing");
+    }
   }
 });
 
