@@ -23,7 +23,6 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //hashed password
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("Hashed Password:", hashedPassword);
 
   const user = await User.create({
     username,
@@ -39,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("User Data not valid");
   }
 
-  res.status(200).json({ message: "Register the User" });
+  res.status(200).json({ message: "User Registered" });
 });
 
 //@description Login User;
