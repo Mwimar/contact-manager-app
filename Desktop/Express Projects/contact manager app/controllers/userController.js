@@ -6,6 +6,7 @@ const User = require("../models/userModel");
 //@description Register User;
 //path api/user/register
 //access Public
+
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -68,6 +69,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.status(200).json({ accessToken });
+    console.log("USER LOGGED IN!");
   } else {
     res.status(400);
     throw new Error("email or password is invalid");

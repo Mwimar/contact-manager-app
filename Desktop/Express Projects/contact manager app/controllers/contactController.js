@@ -7,9 +7,7 @@ const Contact = require("../models/contactModel");
 
 const getContacts = asyncHandler(async (req, res) => {
   const contacts = await Contact.find({ user_id: req.user.id });
-  // let lists = Object.entries(contacts);
-  // console.log(typeof lists);
-  // console.log(lists);
+
   res.status(200).json(contacts);
 });
 
@@ -23,14 +21,44 @@ const createContact = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("All Fields are Mandatory!");
   }
+
   const contact = await Contact.create({
     name,
     email,
     phone,
     user_id: req.user.id,
   });
+
   res.status(201).json(contact);
 });
+
+// const createContact = asyncHandler(async (req, res) => {
+//   const { name, email, phone } = req.body;
+//   if (!name || !email || !phone) {
+//     res.status(400);
+//     throw new Error("All Fields are Mandatory!");
+//   }
+//   let contact;
+//   let data = {};
+//   for (let i = 0; i < 100; i++) {
+//     contact = await Contact.create(
+//       {
+//         name,
+//         email,
+//         phone,
+//         user_id: req.user.id,
+//       },
+//       {
+//         name,
+//         email,
+//         phone,
+//         user_id: req.user.id,
+//       }
+//     );
+//     console.log("Saving Contact " + i);
+//   }
+//   res.status(201).json(contact);
+// });
 
 //@description Get Contact;
 //@route GET api/contacts/:id
