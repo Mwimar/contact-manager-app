@@ -33,13 +33,22 @@ const readFile = async () => {
 };
 //write file async rewrites file content;
 
-const writeFile = async () => {
+// const writeFile = async () => {
+//   try {
+//     await fs.writeFile("./test.txt", "This is a second Statement");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+const appendFile = async () => {
   try {
-    await fs.writeFile("./test.txt", "This is a second Statement");
-  } catch (error) {
-    console.log(error);
+    await fs.appendFile("./test.txt", "This is another Appended Text");
+  } catch (err) {
+    console.log(err);
   }
 };
-writeFile();
+// writeFile();
+appendFile();
 
 readFile();
