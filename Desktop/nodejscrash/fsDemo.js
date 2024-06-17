@@ -31,4 +31,15 @@ const readFile = async () => {
     console.log(err);
   }
 };
+//write file async rewrites file content;
+
+const writeFile = async () => {
+  try {
+    await fs.writeFile("./test.txt", "This is a second Statement");
+  } catch (error) {
+    console.log(error);
+  }
+};
+writeFile();
+
 readFile();
